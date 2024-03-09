@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://bonj6e7slpx14"]
+
+[ext_resource type="Texture2D" uid="uid://d0purgbwab6hp" path="res://grid.png" id="1_uie2n"]
+[ext_resource type="PackedScene" uid="uid://rp77upd12m0j" path="res://player/player.tscn" id="2_gafyi"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xe55x"]
+texture = ExtResource("1_uie2n")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_88ohf"]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_xe55x")
+
+[node name="World" type="Node2D"]
+
+[node name="GridMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_88ohf")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 8, 65536, 0, 262152, 65536, 2, 262144, 0, 2, 196609, 65536, 1, 131073, 65536, 1, 65537, 65536, 1, 65538, 65536, 1, 65539, 65536, 1, 65540, 65536, 1, 65541, 65536, 1, 65542, 65536, 1, 65543, 65536, 1, 131079, 65536, 1, 196615, 65536, 1, 196614, 65536, 1, 196613, 65536, 1, 196612, 65536, 1, 196611, 65536, 1, 196610, 65536, 1, 131074, 65536, 1, 131075, 65536, 1, 131076, 65536, 1, 131077, 65536, 1, 131078, 65536, 1, 1, 65536, 0, 2, 65536, 0, 3, 65536, 0, 4, 65536, 0, 5, 65536, 0, 6, 65536, 0, 7, 65536, 0, 65544, 65536, 1, 131080, 65536, 1, 196616, 65536, 1, 65536, 0, 1, 131072, 0, 1, 196608, 0, 1, 262145, 65536, 2, 262146, 65536, 2, 262147, 65536, 2, 262148, 65536, 2, 262149, 65536, 2, 262150, 65536, 2, 262151, 65536, 2, 262153, 131072, 2, 196617, 131072, 1, 131081, 131072, 1, 65545, 131072, 1, 9, 131072, 0)
+
+[node name="GUIContainer" type="CanvasLayer" parent="."]
+
+[node name="GUIControls" type="Control" parent="GUIContainer"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="Player" parent="." instance=ExtResource("2_gafyi")]
+position = Vector2(64, 64)

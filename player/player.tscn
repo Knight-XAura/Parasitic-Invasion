@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://rp77upd12m0j"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_75scx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pnox"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_407k8"]
+size = Vector2(160, 160)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_75scx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2pnox")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_407k8")
