@@ -1,36 +1,77 @@
-[gd_scene load_steps=5 format=3 uid="uid://bonj6e7slpx14"]
+[gd_scene load_steps=7 format=3 uid="uid://bonj6e7slpx14"]
 
+[ext_resource type="Script" path="res://world.gd" id="1_jychc"]
 [ext_resource type="Texture2D" uid="uid://d0purgbwab6hp" path="res://grid.png" id="1_uie2n"]
+[ext_resource type="PackedScene" uid="uid://b6xktx235a6bd" path="res://enemy/enemy.tscn" id="2_7wxak"]
 [ext_resource type="PackedScene" uid="uid://rp77upd12m0j" path="res://player/player.tscn" id="2_gafyi"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xe55x"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fqg2o"]
 texture = ExtResource("1_uie2n")
-texture_region_size = Vector2i(128, 128)
+texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
 1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrains_peering_bit/bottom_right_corner = 0
+1:0/0/terrains_peering_bit/bottom_side = 0
+1:0/0/terrains_peering_bit/bottom_left_corner = 0
 2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrains_peering_bit/bottom_left_corner = 0
 0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrains_peering_bit/right_side = 0
+0:1/0/terrains_peering_bit/bottom_right_corner = 0
+0:1/0/terrains_peering_bit/top_right_corner = 0
 1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/right_side = 0
+1:1/0/terrains_peering_bit/bottom_right_corner = 0
+1:1/0/terrains_peering_bit/bottom_side = 0
+1:1/0/terrains_peering_bit/bottom_left_corner = 0
+1:1/0/terrains_peering_bit/left_side = 0
+1:1/0/terrains_peering_bit/top_left_corner = 0
+1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/terrains_peering_bit/top_right_corner = 0
 2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrains_peering_bit/bottom_left_corner = 0
+2:1/0/terrains_peering_bit/left_side = 0
+2:1/0/terrains_peering_bit/top_left_corner = 0
 0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrains_peering_bit/top_right_corner = 0
 1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrains_peering_bit/top_left_corner = 0
+1:2/0/terrains_peering_bit/top_side = 0
+1:2/0/terrains_peering_bit/top_right_corner = 0
 2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrains_peering_bit/top_left_corner = 0
 
 [sub_resource type="TileSet" id="TileSet_88ohf"]
-tile_size = Vector2i(128, 128)
-sources/0 = SubResource("TileSetAtlasSource_xe55x")
+tile_size = Vector2i(64, 64)
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Grid"
+terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
+sources/2 = SubResource("TileSetAtlasSource_fqg2o")
 
 [node name="World" type="Node2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_jychc")
+enemy_scene = ExtResource("2_7wxak")
 
 [node name="GridMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_88ohf")
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 0, 0, 8, 65536, 0, 262152, 65536, 2, 262144, 0, 2, 196609, 65536, 1, 131073, 65536, 1, 65537, 65536, 1, 65538, 65536, 1, 65539, 65536, 1, 65540, 65536, 1, 65541, 65536, 1, 65542, 65536, 1, 65543, 65536, 1, 131079, 65536, 1, 196615, 65536, 1, 196614, 65536, 1, 196613, 65536, 1, 196612, 65536, 1, 196611, 65536, 1, 196610, 65536, 1, 131074, 65536, 1, 131075, 65536, 1, 131076, 65536, 1, 131077, 65536, 1, 131078, 65536, 1, 1, 65536, 0, 2, 65536, 0, 3, 65536, 0, 4, 65536, 0, 5, 65536, 0, 6, 65536, 0, 7, 65536, 0, 65544, 65536, 1, 131080, 65536, 1, 196616, 65536, 1, 65536, 0, 1, 131072, 0, 1, 196608, 0, 1, 262145, 65536, 2, 262146, 65536, 2, 262147, 65536, 2, 262148, 65536, 2, 262149, 65536, 2, 262150, 65536, 2, 262151, 65536, 2, 262153, 131072, 2, 196617, 131072, 1, 131081, 131072, 1, 65545, 131072, 1, 9, 131072, 0)
+layer_0/tile_data = PackedInt32Array(0, 2, 0, 8, 65538, 0, 262152, 65538, 1, 262144, 2, 1, 196609, 65538, 1, 131073, 65538, 1, 65537, 65538, 1, 65538, 65538, 1, 65539, 65538, 1, 65540, 65538, 1, 65541, 65538, 1, 65542, 65538, 1, 65543, 65538, 1, 131079, 65538, 1, 196615, 65538, 1, 196614, 65538, 1, 196613, 65538, 1, 196612, 65538, 1, 196611, 65538, 1, 196610, 65538, 1, 131074, 65538, 1, 131075, 65538, 1, 131076, 65538, 1, 131077, 65538, 1, 131078, 65538, 1, 1, 65538, 0, 2, 65538, 0, 3, 65538, 0, 4, 65538, 0, 5, 65538, 0, 6, 65538, 0, 7, 65538, 0, 65544, 65538, 1, 131080, 65538, 1, 196616, 65538, 1, 65536, 2, 1, 131072, 2, 1, 196608, 2, 1, 262145, 65538, 1, 262146, 65538, 1, 262147, 65538, 1, 262148, 65538, 1, 262149, 65538, 1, 262150, 65538, 1, 262151, 65538, 1, 262153, 65538, 1, 196617, 65538, 1, 131081, 65538, 1, 65545, 65538, 1, 9, 65538, 0, 524295, 65538, 1, 524296, 65538, 1, 589832, 65538, 2, 589831, 65538, 2, 589830, 65538, 2, 524294, 65538, 1, 458758, 65538, 1, 458759, 65538, 1, 458760, 65538, 1, 65546, 65538, 1, 10, 65538, 0, 131082, 65538, 1, 65547, 65538, 1, 131083, 65538, 1, 11, 65538, 0, 65548, 65538, 1, 131084, 65538, 1, 12, 65538, 0, 65549, 65538, 1, 131085, 65538, 1, 13, 65538, 0, 65550, 65538, 1, 131086, 65538, 1, 14, 65538, 0, 65551, 65538, 1, 131087, 65538, 1, 15, 65538, 0, 65552, 65538, 1, 131088, 65538, 1, 16, 65538, 0, 65553, 65538, 1, 131089, 65538, 1, 17, 65538, 0, 65554, 65538, 1, 131090, 65538, 1, 18, 65538, 0, 65555, 131074, 1, 131091, 131074, 1, 19, 131074, 0, 196627, 131074, 1, 196626, 65538, 1, 196625, 65538, 1, 196624, 65538, 1, 196623, 65538, 1, 196622, 65538, 1, 196621, 65538, 1, 196620, 65538, 1, 196619, 65538, 1, 196618, 65538, 1, 262154, 65538, 1, 262155, 65538, 1, 262156, 65538, 1, 262157, 65538, 1, 262158, 65538, 1, 262159, 65538, 1, 262160, 65538, 1, 262161, 65538, 1, 262162, 65538, 1, 262163, 131074, 1, 327699, 131074, 1, 327698, 65538, 1, 327697, 65538, 1, 327696, 65538, 1, 327695, 65538, 1, 327694, 65538, 1, 327693, 65538, 1, 327692, 65538, 1, 327691, 65538, 1, 327690, 65538, 1, 327689, 65538, 1, 327688, 65538, 1, 327687, 65538, 1, 327686, 65538, 1, 327685, 65538, 1, 327684, 65538, 1, 327683, 65538, 1, 327682, 65538, 1, 327681, 65538, 1, 327680, 2, 1, 393217, 65538, 1, 393216, 2, 1, 393218, 65538, 1, 393219, 65538, 1, 393220, 65538, 1, 393221, 65538, 1, 393222, 65538, 1, 393223, 65538, 1, 393224, 65538, 1, 393225, 65538, 1, 393226, 65538, 1, 393227, 65538, 1, 393228, 65538, 1, 393229, 65538, 1, 393230, 65538, 1, 393231, 65538, 1, 393232, 65538, 1, 393233, 65538, 1, 393234, 65538, 1, 393235, 131074, 1, 458771, 131074, 1, 458770, 65538, 1, 458769, 65538, 1, 458768, 65538, 1, 458767, 65538, 1, 458766, 65538, 1, 458765, 65538, 1, 458764, 65538, 1, 458763, 65538, 1, 458762, 65538, 1, 458761, 65538, 1, 458757, 65538, 1, 458756, 65538, 1, 458755, 65538, 1, 458754, 65538, 1, 458753, 65538, 1, 458752, 2, 1, 524289, 65538, 1, 524288, 2, 1, 524290, 65538, 1, 524291, 65538, 1, 524292, 65538, 1, 524293, 65538, 1, 524297, 65538, 1, 524298, 65538, 1, 524299, 65538, 1, 524300, 65538, 1, 524301, 65538, 1, 524302, 65538, 1, 524303, 65538, 1, 524304, 65538, 1, 524305, 65538, 1, 524306, 65538, 1, 524307, 131074, 1, 589843, 131074, 2, 589842, 65538, 2, 589841, 65538, 2, 589840, 65538, 2, 589839, 65538, 2, 589838, 65538, 2, 589837, 65538, 2, 589836, 65538, 2, 589835, 65538, 2, 589834, 65538, 2, 589833, 65538, 2, 589829, 65538, 2, 589828, 65538, 2, 589827, 65538, 2, 589826, 65538, 2, 589825, 65538, 2, 589824, 2, 2)
 
 [node name="GUIContainer" type="CanvasLayer" parent="."]
 
-[node name="GUIControls" type="Control" parent="GUIContainer"]
-layout_mode = 3
+[node name="GUIControls" type="HBoxContainer" parent="GUIContainer"]
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -40,5 +81,31 @@ grow_horizontal = 2
 grow_vertical = 0
 size_flags_vertical = 8
 
+[node name="VBoxContainer" type="VBoxContainer" parent="GUIContainer/GUIControls"]
+layout_mode = 2
+alignment = 1
+
+[node name="Health" type="Label" parent="GUIContainer/GUIControls/VBoxContainer"]
+layout_mode = 2
+text = "Health:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUIContainer/GUIControls"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="GUIContainer/GUIControls/VBoxContainer2"]
+layout_mode = 2
+value = 100.0
+
 [node name="Player" parent="." instance=ExtResource("2_gafyi")]
-position = Vector2(64, 64)
+position = Vector2(608, 288)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="BattleTurnActionTimer" type="Timer" parent="."]
+
+[connection signal="player_moved" from="Player" to="." method="_on_player_moved"]
+[connection signal="timeout" from="BattleTurnActionTimer" to="." method="_on_turn_pusher_timeout"]

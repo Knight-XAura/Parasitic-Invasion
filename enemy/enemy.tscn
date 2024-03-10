@@ -1,42 +1,43 @@
-[gd_scene load_steps=6 format=3 uid="uid://rp77upd12m0j"]
+[gd_scene load_steps=6 format=3 uid="uid://b6xktx235a6bd"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1_75scx"]
+[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_v6mkc"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2pnox"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yb18"]
 size = Vector2(64, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_407k8"]
-size = Vector2(58, 184)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g8u0p"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yduo5"]
 size = Vector2(184, 58)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_774vv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ru6na"]
+size = Vector2(58, 184)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0f4n"]
 size = Vector2(184, 184)
 
-[node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_75scx")
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_v6mkc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_2pnox")
+shape = SubResource("RectangleShape2D_8yb18")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
 
 [node name="Melee" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee"]
-shape = SubResource("RectangleShape2D_407k8")
+shape = SubResource("RectangleShape2D_yduo5")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Melee"]
-position = Vector2(2.08165e-12, 2.08165e-12)
-shape = SubResource("RectangleShape2D_g8u0p")
+shape = SubResource("RectangleShape2D_ru6na")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
 
 [node name="DetectionAndRanged" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionAndRanged"]
-shape = SubResource("RectangleShape2D_774vv")
+shape = SubResource("RectangleShape2D_q0f4n")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
 
 [node name="BattleTurn" type="Timer" parent="."]
 
