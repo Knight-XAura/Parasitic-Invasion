@@ -1,22 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6xktx235a6bd"]
+[gd_scene load_steps=7 format=3 uid="uid://b6xktx235a6bd"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_v6mkc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yb18"]
-size = Vector2(64, 64)
+size = Vector2(60, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yduo5"]
-size = Vector2(184, 58)
+size = Vector2(180, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ru6na"]
-size = Vector2(58, 184)
+size = Vector2(56, 180)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aqgrp"]
+size = Vector2(48, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q0f4n"]
-size = Vector2(184, 184)
+size = Vector2(180, 180)
 
 [node name="Enemy" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 6
+collision_mask = 6
 script = ExtResource("1_v6mkc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -26,20 +29,43 @@ debug_color = Color(1, 0.6, 0.701961, 0.419608)
 [node name="Melee" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee"]
+visible = false
 shape = SubResource("RectangleShape2D_yduo5")
 debug_color = Color(1, 0.6, 0.701961, 0.419608)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Melee"]
+visible = false
 shape = SubResource("RectangleShape2D_ru6na")
 debug_color = Color(1, 0.6, 0.701961, 0.419608)
 
+[node name="MinimalCollider" type="CollisionShape2D" parent="Melee"]
+shape = SubResource("RectangleShape2D_aqgrp")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
+
 [node name="DetectionAndRanged" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionAndRanged"]
 shape = SubResource("RectangleShape2D_q0f4n")
 debug_color = Color(1, 0.6, 0.701961, 0.419608)
 
 [node name="BattleTurn" type="Timer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -28.0
+offset_right = 24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 10.0
+value = 10.0
+show_percentage = false
 
 [connection signal="body_entered" from="Melee" to="." method="_on_melee_body_entered"]
 [connection signal="body_exited" from="Melee" to="." method="_on_melee_body_exited"]

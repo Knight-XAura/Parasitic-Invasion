@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhahy58563r37"]
+
+[ext_resource type="PackedScene" uid="uid://xo4ahtosiwso" path="res://powerups/pickup.tscn" id="1_kdveo"]
+[ext_resource type="Script" path="res://powerups/elements/element.gd" id="2_vlbrk"]
+
+[node name="Element" instance=ExtResource("1_kdveo")]
+script = ExtResource("2_vlbrk")

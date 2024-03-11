@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://dry6j0fdj43ax"]
+
+[ext_resource type="Script" path="res://game_over/game_over.gd" id="1_q8u08"]
+
+[node name="GameOverScreen" type="CanvasLayer"]
+script = ExtResource("1_q8u08")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+auto_translate_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "YOU DIED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayInstruction" type="Label" parent="PanelContainer/MarginContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Press 'SPACE' to play again!"
+horizontal_alignment = 1
+vertical_alignment = 1

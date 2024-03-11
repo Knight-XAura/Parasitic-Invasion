@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://xo4ahtosiwso"]
+
+[ext_resource type="Script" path="res://powerups/pickup.gd" id="1_i8ukl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ks8bw"]
+size = Vector2(32, 32)
+
+[node name="Pickup" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_i8ukl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ks8bw")
+debug_color = Color(0, 0, 0.701961, 0.419608)

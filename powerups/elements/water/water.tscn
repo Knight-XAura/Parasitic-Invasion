@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://coqqrlkl1umx7"]
+
+[ext_resource type="PackedScene" uid="uid://dhahy58563r37" path="res://powerups/elements/element.tscn" id="1_db0u2"]
+[ext_resource type="Script" path="res://powerups/elements/water/water.gd" id="2_sspnn"]
+
+[node name="Water" instance=ExtResource("1_db0u2")]
+script = ExtResource("2_sspnn")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

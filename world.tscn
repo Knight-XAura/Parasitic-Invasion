@@ -71,41 +71,79 @@ layer_0/tile_data = PackedInt32Array(0, 2, 0, 8, 65538, 0, 262152, 65538, 1, 262
 
 [node name="GUIContainer" type="CanvasLayer" parent="."]
 
-[node name="GUIControls" type="HBoxContainer" parent="GUIContainer"]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -80.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="VBoxContainer3" type="VBoxContainer" parent="GUIContainer"]
+offset_top = 639.0
+offset_right = 1280.0
+offset_bottom = 720.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="GUIControls" type="HBoxContainer" parent="GUIContainer/VBoxContainer3"]
+layout_mode = 2
 size_flags_vertical = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUIContainer/GUIControls"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUIContainer/VBoxContainer3/GUIControls"]
 layout_mode = 2
 alignment = 1
 
-[node name="Health" type="Label" parent="GUIContainer/GUIControls/VBoxContainer"]
+[node name="Health" type="Label" parent="GUIContainer/VBoxContainer3/GUIControls/VBoxContainer"]
 layout_mode = 2
 text = "Health:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="GUIContainer/GUIControls"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="GUIContainer/VBoxContainer3/GUIControls"]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="HealthBar" type="ProgressBar" parent="GUIContainer/GUIControls/VBoxContainer2"]
+[node name="HealthBar" type="ProgressBar" parent="GUIContainer/VBoxContainer3/GUIControls/VBoxContainer2"]
+custom_minimum_size = Vector2(2.08165e-12, 27)
 layout_mode = 2
 value = 100.0
+show_percentage = false
+
+[node name="HealthDisplay" type="Label" parent="GUIContainer/VBoxContainer3/GUIControls/VBoxContainer2/HealthBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "100/100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUIContainer/VBoxContainer3"]
+layout_mode = 2
+
+[node name="MovesCount" type="Label" parent="GUIContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Moves: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyKillCount" type="Label" parent="GUIContainer/VBoxContainer3/HBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Killed: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Player" parent="." instance=ExtResource("2_gafyi")]
 position = Vector2(608, 288)
 
 [node name="Enemies" type="Node2D" parent="."]
 
+[node name="Powerups" type="Node2D" parent="."]
+
 [node name="BattleTurnActionTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
 
 [connection signal="player_moved" from="Player" to="." method="_on_player_moved"]
-[connection signal="timeout" from="BattleTurnActionTimer" to="." method="_on_turn_pusher_timeout"]
+[connection signal="timeout" from="BattleTurnActionTimer" to="." method="_on_battle_turn_action_timer_timeout"]

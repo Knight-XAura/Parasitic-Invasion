@@ -6,15 +6,17 @@
 size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_407k8"]
-size = Vector2(58, 184)
+size = Vector2(56, 180)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8u0p"]
-size = Vector2(184, 58)
+size = Vector2(180, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_774vv"]
-size = Vector2(184, 184)
+size = Vector2(180, 180)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_75scx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -32,6 +34,7 @@ position = Vector2(2.08165e-12, 2.08165e-12)
 shape = SubResource("RectangleShape2D_g8u0p")
 
 [node name="DetectionAndRanged" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 collision_mask = 2
 

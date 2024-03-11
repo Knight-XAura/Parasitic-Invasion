@@ -7,13 +7,22 @@ var battlers: Array[CharacterBody2D] = []
 var max_health: int = 100
 var health: int = 100:
 	set(value):
-		health = value
 		if value <= 0:
-			health_bar.value = 0
-			queue_free()
+			value = 0
+			battle_turn.stop()
+			world.battle_turn_action_timer.stop()
+			for battler in battlers:
+				battler.battle_turn.stop()
+			add_sibling(world.game_over_overlay.instantiate(), true)
+		if value > max_health:
+			value = max_health
 		health_bar.value = value
+		health_display.text = str(value) + "/" + str(max_health)
+		health = value
 var attack: int = 2
 var defense: int = 1
+var critical_hit_chance: int = 5
+var critical_hit_bonus: int = 2
 var elemental_weakness: String = ""
 var elemental_attack: String = ""
 var has_ranged_attack: bool = false
@@ -22,13 +31,16 @@ var is_melee_in_range: bool = false
 const MOVE_DISTANCE: int = 64
 
 @onready var world = $/root/World
-@onready var health_bar = $/root/World/GUIContainer/GUIControls/VBoxContainer2/HealthBar
+@onready var health_bar = $/root/World/GUIContainer/VBoxContainer3/GUIControls/VBoxContainer2/HealthBar
+@onready var health_display: Label = $/root/World/GUIContainer/VBoxContainer3/GUIControls/VBoxContainer2/HealthBar/HealthDisplay
 @onready var battle_turn: Timer = $BattleTurn
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.is_action_pressed("move") and not battling:
+	if event is InputEventKey and Input.is_action_just_pressed("move") and not battling:
 		velocity = Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		if velocity.abs().round() == Vector2(1, 1):
+			return
 		if world.moveable_area.has_point(position + velocity * MOVE_DISTANCE):
 			position += velocity * MOVE_DISTANCE
 		player_moved.emit()
@@ -44,7 +56,7 @@ func take_damage(amount: int, element: String) -> void:
 
 
 func _on_detection_and_ranged_body_entered(body: Node2D) -> void:
-	if has_ranged_attack and not is_melee_in_range and body.name == "Player":
+	if has_ranged_attack and not is_melee_in_range:
 		pass
 
 
@@ -56,9 +68,9 @@ func _on_melee_body_entered(body: Node2D) -> void:
 	is_melee_in_range = true
 	battling = true
 	battlers.append(body)
-	battlers[0].top_level = true
 	battle_turn.start()
-	
+	if world.battle_turn_action_timer.wait_time == 5.0:
+		world.battle_turn_action_timer.start(1.0)
 
 
 func _on_melee_body_exited(body: Node2D) -> void:
@@ -67,9 +79,10 @@ func _on_melee_body_exited(body: Node2D) -> void:
 		is_melee_in_range = false
 		battling = false
 		battle_turn.stop()
-	else:
-		battlers[0].top_level = true
+		world.battle_turn_action_timer.start(5.0)
 
 
 func _on_battle_turn_timeout() -> void:
-	battlers[0].take_damage(attack, elemental_attack)
+	randomize()
+	var damage: int = attack * critical_hit_bonus if randi_range(1, 100) <= critical_hit_chance else attack
+	battlers[0].take_damage(damage, elemental_attack)
