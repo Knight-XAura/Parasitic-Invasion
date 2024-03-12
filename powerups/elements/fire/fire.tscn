@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://csr0m0fxwn8ux"]
+[gd_scene load_steps=4 format=3 uid="uid://csr0m0fxwn8ux"]
 
 [ext_resource type="PackedScene" uid="uid://dhahy58563r37" path="res://powerups/elements/element.tscn" id="1_x4g36"]
 [ext_resource type="Script" path="res://powerups/elements/fire/fire.gd" id="2_2n3kq"]
+[ext_resource type="Texture2D" uid="uid://vmg50o5le241" path="res://powerups/elements/fire/fire.png" id="3_mb6xu"]
 
 [node name="Fire" instance=ExtResource("1_x4g36")]
 script = ExtResource("2_2n3kq")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_mb6xu")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

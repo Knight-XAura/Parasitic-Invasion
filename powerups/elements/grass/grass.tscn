@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0a08lkwxl6ff"]
+[gd_scene load_steps=4 format=3 uid="uid://b0a08lkwxl6ff"]
 
 [ext_resource type="PackedScene" uid="uid://dhahy58563r37" path="res://powerups/elements/element.tscn" id="1_cawvq"]
 [ext_resource type="Script" path="res://powerups/elements/grass/grass.gd" id="2_4qchq"]
+[ext_resource type="Texture2D" uid="uid://bgg3p30nlfskf" path="res://powerups/elements/grass/grass.png" id="3_2uggr"]
 
 [node name="Grass" instance=ExtResource("1_cawvq")]
 script = ExtResource("2_4qchq")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("3_2uggr")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

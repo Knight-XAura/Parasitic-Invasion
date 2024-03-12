@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://yl6d3kpldtkf"]
+[gd_scene load_steps=4 format=3 uid="uid://yl6d3kpldtkf"]
 
 [ext_resource type="Script" path="res://main_menu/main_menu.gd" id="1_geiv1"]
+[ext_resource type="Texture2D" uid="uid://bmhct1ik3nhey" path="res://main_menu/grid.png" id="2_nx7rr"]
+[ext_resource type="Texture2D" uid="uid://cbsjogscqnxby" path="res://main_menu/rock-paper-scissors.png" id="3_cui6p"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,6 +11,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_geiv1")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -37,3 +41,18 @@ theme_override_font_sizes/font_size = 48
 text = "Press 'SPACE' to play!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 2.08165e-12)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_nx7rr")
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_cui6p")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6xktx235a6bd"]
+[gd_scene load_steps=8 format=3 uid="uid://b6xktx235a6bd"]
 
 [ext_resource type="Script" path="res://enemy/enemy.gd" id="1_v6mkc"]
+[ext_resource type="Texture2D" uid="uid://c3okq51vlx2ce" path="res://enemy/larva.png" id="2_ll2pi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yb18"]
 size = Vector2(60, 60)
@@ -66,6 +67,9 @@ grow_vertical = 2
 max_value = 10.0
 value = 10.0
 show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ll2pi")
 
 [connection signal="body_entered" from="Melee" to="." method="_on_melee_body_entered"]
 [connection signal="body_exited" from="Melee" to="." method="_on_melee_body_exited"]

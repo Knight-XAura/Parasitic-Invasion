@@ -37,3 +37,11 @@ theme_override_font_sizes/font_size = 48
 text = "Press 'SPACE' to play again!"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Credit" type="Label" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Credits:
+Dino Player Character gotten from arks.itch.io and please consider visitng his X (Twitter) page @ScissorMarks"
+horizontal_alignment = 1
+vertical_alignment = 1

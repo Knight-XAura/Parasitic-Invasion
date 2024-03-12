@@ -70,12 +70,12 @@ func _ready() -> void:
 func _on_player_moved() -> void:
 	battle_turn_action_timer.start(5.0)
 	move_enemies()
-	if powerup_spawn_turn_counter == powerup_spawn_turn_threshold:
-		powerup_spawn_turn_counter = 0
-		spawn_powerup()
 	if enemy_spawn_turn_counter == enemy_spawn_turn_threshold:
 		enemy_spawn_turn_counter = 0
 		spawn_enemy()
+	if powerup_spawn_turn_counter == powerup_spawn_turn_threshold:
+		powerup_spawn_turn_counter = 0
+		spawn_powerup()
 
 func move_enemies() -> void:
 	total_moves_count += 1

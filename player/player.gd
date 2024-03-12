@@ -23,10 +23,11 @@ var attack: int = 2
 var defense: int = 1
 var critical_hit_chance: int = 5
 var critical_hit_bonus: int = 2
-var elemental_weakness: String = ""
-var elemental_attack: String = ""
+var elemental_weakness: String = "Normal"
+var elemental_attack: String = "Normal"
 var has_ranged_attack: bool = false
 var is_melee_in_range: bool = false
+var animation_element: String = "normal"
 
 const MOVE_DISTANCE: int = 64
 
@@ -34,6 +35,7 @@ const MOVE_DISTANCE: int = 64
 @onready var health_bar = $/root/World/GUIContainer/VBoxContainer3/GUIControls/VBoxContainer2/HealthBar
 @onready var health_display: Label = $/root/World/GUIContainer/VBoxContainer3/GUIControls/VBoxContainer2/HealthBar/HealthDisplay
 @onready var battle_turn: Timer = $BattleTurn
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 
 func _input(event: InputEvent) -> void:
@@ -43,7 +45,15 @@ func _input(event: InputEvent) -> void:
 			return
 		if world.moveable_area.has_point(position + velocity * MOVE_DISTANCE):
 			position += velocity * MOVE_DISTANCE
+		animated_sprite_2d.play("move_" + animation_element)
+		match velocity.x:
+			-1:
+				animated_sprite_2d.flip_h = true
+			1:
+				animated_sprite_2d.flip_h = false
 		player_moved.emit()
+		await animated_sprite_2d.animation_finished
+		animated_sprite_2d.play("idle_" + animation_element)
 
 
 func take_damage(amount: int, element: String) -> void:
