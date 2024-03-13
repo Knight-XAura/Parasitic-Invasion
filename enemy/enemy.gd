@@ -22,6 +22,13 @@ var elemental_weakness: String = ""
 var elemental_attack: String = ""
 var has_ranged_attack: bool = randi_range(0, 1)
 var is_melee_in_range: bool = false
+var is_elementally_buffed: bool = false
+var is_elementally_weakened: bool = false
+var original_attack: int = 4
+var original_defense: int = 2
+var element_turn_count: int = 0
+var element_turn_threshold: int = 10
+var is_elementally_buffed_or_weakened: bool = false
 
 const MOVE_DISTANCE: int = 64
 const MOVE_DIRECTION: Array[Vector2] = [Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0), Vector2(0, -1), Vector2(0, 0)]
@@ -54,6 +61,15 @@ func move() -> void:
 		velocity = MOVE_DIRECTION.pick_random()
 		move_position = position + velocity * MOVE_DISTANCE
 	position += velocity * MOVE_DISTANCE
+	if is_elementally_buffed_or_weakened:
+		element_turn_count += 1
+	if is_elementally_buffed_or_weakened and element_turn_count == element_turn_threshold:
+			element_turn_count = 0
+			attack = original_attack
+			defense = original_defense
+			is_elementally_buffed = false
+			is_elementally_weakened = false
+			is_elementally_buffed_or_weakened = false
 	
 func is_move_position_valid(test_position: Vector2) -> bool:
 	if world.moveable_area.has_point(test_position):

@@ -23,11 +23,22 @@ var attack: int = 2
 var defense: int = 1
 var critical_hit_chance: int = 5
 var critical_hit_bonus: int = 2
-var elemental_weakness: String = "Normal"
+var elemental_weakness: String = "None"
 var elemental_attack: String = "Normal"
 var has_ranged_attack: bool = false
 var is_melee_in_range: bool = false
 var animation_element: String = "normal"
+var is_not_normal_element: bool = false
+var original_attack: int = 4
+var original_defense: int = 2
+var original_critical_hit_chance: int = 5
+var original_critical_hit_bonus = 2
+var element_turn_count: int = 0:
+	set(value):
+		print(value)
+		element_turn_count = value
+var element_turn_threshold: int = 10
+var is_elementally_super_buffed: bool = false
 
 const MOVE_DISTANCE: int = 64
 
@@ -45,7 +56,10 @@ func _input(event: InputEvent) -> void:
 			return
 		if world.moveable_area.has_point(position + velocity * MOVE_DISTANCE):
 			position += velocity * MOVE_DISTANCE
+		else:
+			return
 		animated_sprite_2d.play("move_" + animation_element)
+		print(velocity.x)
 		match velocity.x:
 			-1:
 				animated_sprite_2d.flip_h = true
@@ -53,6 +67,21 @@ func _input(event: InputEvent) -> void:
 				animated_sprite_2d.flip_h = false
 		player_moved.emit()
 		await animated_sprite_2d.animation_finished
+		if is_not_normal_element:
+			element_turn_count += 1
+		if is_not_normal_element and element_turn_count == element_turn_threshold:
+			elemental_weakness = "None"
+			elemental_attack = "Normal"
+			animation_element = "normal"
+			is_not_normal_element = false
+			if is_elementally_super_buffed:
+				is_elementally_super_buffed = false
+				attack = original_attack
+				defense = original_defense
+				critical_hit_chance = original_critical_hit_chance
+				critical_hit_bonus = original_critical_hit_bonus
+			element_turn_count = 0
+		print(element_turn_count)
 		animated_sprite_2d.play("idle_" + animation_element)
 
 
@@ -89,7 +118,8 @@ func _on_melee_body_exited(body: Node2D) -> void:
 		is_melee_in_range = false
 		battling = false
 		battle_turn.stop()
-		world.battle_turn_action_timer.start(5.0)
+		if not health == 0:
+			world.battle_turn_action_timer.start(5.0)
 
 
 func _on_battle_turn_timeout() -> void:

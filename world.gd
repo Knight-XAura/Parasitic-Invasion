@@ -31,9 +31,9 @@ const inner_spawn_tiles: Array[Vector2] = [
 var ally_list: Array[CharacterBody2D]
 var powerup_list: Array[Area2D]
 var enemy_spawn_turn_counter: int = 0
-var enemy_spawn_turn_threshold: int = 10
+var enemy_spawn_turn_threshold: int = 25 # 10
 var powerup_spawn_turn_counter: int = 0
-var powerup_spawn_turn_threshold: int = 15
+var powerup_spawn_turn_threshold: int = 5 # 15
 var powerup_scenes: Array[PackedScene] = [
 	preload("res://powerups/health/health.tscn"),
 	preload("res://powerups/elements/fire/fire.tscn"),
@@ -59,10 +59,6 @@ var game_over_overlay: PackedScene = preload("res://game_over/game_over.tscn")
 @onready var enemy_kill_count: Label = $/root/World/GUIContainer/VBoxContainer3/HBoxContainer/EnemyKillCount
 @onready var moves_count: Label = $GUIContainer/VBoxContainer3/HBoxContainer/MovesCount
 
-
-enum POWERUPS {
-	HEALTH, FIRE, WATER, GRASS
-}
 
 func _ready() -> void:
 	spawn_enemy()
@@ -124,6 +120,22 @@ func is_spawn_position_valid(test_position: Vector2) -> bool:
 
 func _on_battle_turn_action_timer_timeout() -> void:
 	move_enemies()
+	if player.is_not_normal_element:
+			player.element_turn_count += 1
+	if player.is_not_normal_element and player.element_turn_count == player.element_turn_threshold:
+		player.elemental_weakness = "None"
+		player.elemental_attack = "Normal"
+		player.animation_element = "normal"
+		player.is_not_normal_element = false
+		if player.is_elementally_super_buffed:
+			player.is_elementally_super_buffed = false
+			player.attack = player.original_attack
+			player.defense = player.original_defense
+			player.critical_hit_chance = player.original_critical_hit_chance
+			player.critical_hit_bonus = player.original_critical_hit_bonus
+		player.element_turn_count = 0
+	player.animated_sprite_2d.play("idle_" + player.animation_element)
+	print(player.element_turn_count)
 	if powerup_spawn_turn_counter == powerup_spawn_turn_threshold:
 		powerup_spawn_turn_counter = 0
 		spawn_powerup()
