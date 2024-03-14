@@ -37,6 +37,7 @@ const MOVE_DIRECTION: Array[Vector2] = [Vector2(1, 0), Vector2(0, 1), Vector2(-1
 @onready var battle_turn: Timer = $BattleTurn
 @onready var battler: CharacterBody2D = $/root/World/Player
 @onready var health_bar: ProgressBar = $HealthBar
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
@@ -45,10 +46,13 @@ func _ready() -> void:
 	match elemental_attack:
 		"Fire":
 			elemental_weakness = "Water"
+			sprite_2d.self_modulate = Color(0.937, 0.122, 0)
 		"Water":
 			elemental_weakness = "Grass"
+			sprite_2d.self_modulate = Color(0, 0.498, 0.937)
 		"Grass":
 			elemental_weakness = "Fire"
+			sprite_2d.self_modulate = Color(0.122, 0.867, 0.247)
 
 func move() -> void:
 	randomize()

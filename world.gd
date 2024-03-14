@@ -1,6 +1,6 @@
 extends Node2D
 
-const elements = ["Fire", "Water", "Grass"]
+const elements = ["Fire", "Water", "Grass", "None"]
 const edge_spawn_tiles: Array[Vector2] = [
 	Vector2(32, 96), Vector2(32, 160), Vector2(32, 224), Vector2(32, 288), Vector2(32, 352), Vector2(32, 416), Vector2(32, 480), Vector2(32, 544), Vector2(32, 608),
 	Vector2(96, 608), Vector2(160, 608), Vector2(224, 608), Vector2(288, 608), Vector2(352, 608), Vector2(416, 608), Vector2(480, 608), Vector2(544, 608), Vector2(608, 608), Vector2(672, 608), Vector2(736, 608), Vector2(800, 608), Vector2(864, 608), Vector2(928, 608), Vector2(992, 608), Vector2(1056, 608), Vector2(1120, 608), Vector2(1184, 608), Vector2(1248, 608),
@@ -31,9 +31,9 @@ const inner_spawn_tiles: Array[Vector2] = [
 var ally_list: Array[CharacterBody2D]
 var powerup_list: Array[Area2D]
 var enemy_spawn_turn_counter: int = 0
-var enemy_spawn_turn_threshold: int = 25 # 10
+var enemy_spawn_turn_threshold: int = 10
 var powerup_spawn_turn_counter: int = 0
-var powerup_spawn_turn_threshold: int = 5 # 15
+var powerup_spawn_turn_threshold: int = 15
 var powerup_scenes: Array[PackedScene] = [
 	preload("res://powerups/health/health.tscn"),
 	preload("res://powerups/elements/fire/fire.tscn"),
@@ -135,7 +135,6 @@ func _on_battle_turn_action_timer_timeout() -> void:
 			player.critical_hit_bonus = player.original_critical_hit_bonus
 		player.element_turn_count = 0
 	player.animated_sprite_2d.play("idle_" + player.animation_element)
-	print(player.element_turn_count)
 	if powerup_spawn_turn_counter == powerup_spawn_turn_threshold:
 		powerup_spawn_turn_counter = 0
 		spawn_powerup()

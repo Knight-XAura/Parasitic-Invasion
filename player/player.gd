@@ -33,10 +33,7 @@ var original_attack: int = 4
 var original_defense: int = 2
 var original_critical_hit_chance: int = 5
 var original_critical_hit_bonus = 2
-var element_turn_count: int = 0:
-	set(value):
-		print(value)
-		element_turn_count = value
+var element_turn_count: int = 0
 var element_turn_threshold: int = 10
 var is_elementally_super_buffed: bool = false
 
@@ -58,15 +55,14 @@ func _input(event: InputEvent) -> void:
 			position += velocity * MOVE_DISTANCE
 		else:
 			return
-		animated_sprite_2d.play("move_" + animation_element)
-		print(velocity.x)
+		#animated_sprite_2d.play("move_" + animation_element)
 		match velocity.x:
-			-1:
+			-1.0:
 				animated_sprite_2d.flip_h = true
-			1:
+			1.0:
 				animated_sprite_2d.flip_h = false
 		player_moved.emit()
-		await animated_sprite_2d.animation_finished
+		#await animated_sprite_2d.animation_finished
 		if is_not_normal_element:
 			element_turn_count += 1
 		if is_not_normal_element and element_turn_count == element_turn_threshold:
@@ -81,7 +77,6 @@ func _input(event: InputEvent) -> void:
 				critical_hit_chance = original_critical_hit_chance
 				critical_hit_bonus = original_critical_hit_bonus
 			element_turn_count = 0
-		print(element_turn_count)
 		animated_sprite_2d.play("idle_" + animation_element)
 
 
