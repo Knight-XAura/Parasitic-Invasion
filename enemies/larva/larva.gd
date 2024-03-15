@@ -29,6 +29,8 @@ var original_defense: int = 2
 var element_turn_count: int = 0
 var element_turn_threshold: int = 10
 var is_elementally_buffed_or_weakened: bool = false
+var trail_scene: PackedScene = preload("res://enemies/trail/trail.tscn")
+var trail: Area2D
 
 const MOVE_DISTANCE: int = 64
 const MOVE_DIRECTION: Array[Vector2] = [Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0), Vector2(0, -1), Vector2(0, 0)]
@@ -55,6 +57,7 @@ func _ready() -> void:
 			sprite_2d.self_modulate = Color(0.122, 0.867, 0.247)
 
 func move() -> void:
+	#move_trail(global_position)
 	randomize()
 	velocity = MOVE_DIRECTION.pick_random()
 	if not velocity:
@@ -114,3 +117,15 @@ func _on_battle_turn_timeout() -> void:
 	randomize()
 	var damage: int = attack * critical_hit_bonus if randi_range(1, 100) <= critical_hit_chance else attack
 	battler.take_damage(damage, elemental_attack)
+	
+	
+func move_trail(pos: Vector2) -> void: # Positions may need to be local coords and only in reference to larva to ensure useability
+	if elemental_attack == "None" and trail != null:
+		trail.queue_free()
+	if not trail and elemental_attack != "None":
+		trail = trail_scene.instantiate()
+		trail.trail_element = elemental_attack
+		trail.global_position = pos
+		add_child(trail)
+	else:
+		trail.global_position = pos

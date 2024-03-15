@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dka5a0p1mttoj"]
+
+[ext_resource type="Texture2D" uid="uid://c1il4f4yl6lho" path="res://enemies/egg/egg.png" id="1_48ln7"]
+[ext_resource type="Script" path="res://enemies/egg/egg.gd" id="1_db3bi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0jvlm"]
+size = Vector2(32, 32)
+
+[node name="Egg" type="Area2D"]
+script = ExtResource("1_db3bi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0jvlm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_48ln7")
