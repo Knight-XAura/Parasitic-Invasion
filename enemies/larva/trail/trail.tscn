@@ -1,7 +1,14 @@
-[gd_scene format=3 uid="uid://cnco7px4wev6g"]
+[gd_scene load_steps=3 format=3 uid="uid://cnco7px4wev6g"]
 
-[node name="Area2D" type="Area2D"]
+[ext_resource type="Script" path="res://enemies/larva/trail/trail.gd" id="1_xwb52"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gj5fb"]
+size = Vector2(32, 32)
+
+[node name="Trail" type="Area2D"]
+script = ExtResource("1_xwb52")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gj5fb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

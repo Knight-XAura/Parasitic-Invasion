@@ -72,8 +72,6 @@ func _on_player_moved() -> void:
 	if powerup_spawn_turn_counter == powerup_spawn_turn_threshold:
 		powerup_spawn_turn_counter = 0
 		spawn_powerup()
-	player.moving = false
-	print("NOT MOVING")
 
 func move_enemies() -> void:
 	total_moves_count += 1

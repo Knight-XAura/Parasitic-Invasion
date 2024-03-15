@@ -104,10 +104,6 @@ func _on_detection_and_ranged_body_exited(body: Node2D) -> void:
 
 
 func _on_melee_body_entered(body: Node2D) -> void:
-	print("BODY ENTERED")
-	if moving == true:
-		print("IGNORED BODY")
-		return
 	is_melee_in_range = true
 	battling = true
 	battlers.append(body)
@@ -123,8 +119,6 @@ func _on_melee_body_entered(body: Node2D) -> void:
 
 
 func _on_melee_body_exited(body: Node2D) -> void:
-	if moving == true:
-		return
 	battlers.remove_at(0)
 	if battlers.is_empty():
 		is_melee_in_range = false
