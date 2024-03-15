@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b6xktx235a6bd"]
 
-[ext_resource type="Script" path="res://enemy/enemy.gd" id="1_v6mkc"]
-[ext_resource type="Texture2D" uid="uid://c3okq51vlx2ce" path="res://enemy/larva.png" id="2_ll2pi"]
+[ext_resource type="Script" path="res://enemies/larva/larva.gd" id="1_hse6x"]
+[ext_resource type="Texture2D" uid="uid://c3okq51vlx2ce" path="res://enemies/larva/larva.png" id="2_knfcb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yb18"]
 size = Vector2(60, 60)
@@ -21,7 +21,7 @@ size = Vector2(180, 180)
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 6
 collision_mask = 6
-script = ExtResource("1_v6mkc")
+script = ExtResource("1_hse6x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8yb18")
@@ -69,7 +69,7 @@ value = 10.0
 show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_ll2pi")
+texture = ExtResource("2_knfcb")
 
 [connection signal="body_entered" from="Melee" to="." method="_on_melee_body_entered"]
 [connection signal="body_exited" from="Melee" to="." method="_on_melee_body_exited"]

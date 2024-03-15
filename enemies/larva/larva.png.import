@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3okq51vlx2ce"
-path="res://.godot/imported/larva.png-7e50b9b6bc8c987d3fc0f9cb9daab91c.ctex"
+path="res://.godot/imported/larva.png-a6501fb75f3dc02f255d81f1ecd5f4d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemy/larva.png"
-dest_files=["res://.godot/imported/larva.png-7e50b9b6bc8c987d3fc0f9cb9daab91c.ctex"]
+source_file="res://enemies/larva/larva.png"
+dest_files=["res://.godot/imported/larva.png-a6501fb75f3dc02f255d81f1ecd5f4d9.ctex"]
 
 [params]
 

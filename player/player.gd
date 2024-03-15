@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal player_moved
 
+var moving: bool = false
 var battling: bool = false
 var battlers: Array[CharacterBody2D] = []
 var max_health: int = 100
@@ -52,6 +53,8 @@ func _input(event: InputEvent) -> void:
 		if velocity.abs().round() == Vector2(1, 1):
 			return
 		if world.moveable_area.has_point(position + velocity * MOVE_DISTANCE):
+			moving = true
+			print("MOVING")
 			position += velocity * MOVE_DISTANCE
 		else:
 			return
@@ -86,6 +89,8 @@ func take_damage(amount: int, element: String) -> void:
 	elif element == elemental_attack:
 		amount /= 2
 	amount -= defense if amount - defense > 0 else 0
+	if amount > 0:
+		animated_sprite_2d.play("hurt_" + animation_element)
 	health -= amount
 
 
@@ -99,15 +104,27 @@ func _on_detection_and_ranged_body_exited(body: Node2D) -> void:
 
 
 func _on_melee_body_entered(body: Node2D) -> void:
+	print("BODY ENTERED")
+	if moving == true:
+		print("IGNORED BODY")
+		return
 	is_melee_in_range = true
 	battling = true
 	battlers.append(body)
+	print(str((battlers[0].global_position - global_position) / MOVE_DISTANCE))
+	match ((battlers[0].global_position - global_position) / MOVE_DISTANCE).x:
+		-1.0:
+			animated_sprite_2d.flip_h = true
+		1.0:
+			animated_sprite_2d.flip_h = false
 	battle_turn.start()
 	if world.battle_turn_action_timer.wait_time == 5.0:
 		world.battle_turn_action_timer.start(1.0)
 
 
 func _on_melee_body_exited(body: Node2D) -> void:
+	if moving == true:
+		return
 	battlers.remove_at(0)
 	if battlers.is_empty():
 		is_melee_in_range = false
@@ -115,9 +132,16 @@ func _on_melee_body_exited(body: Node2D) -> void:
 		battle_turn.stop()
 		if not health == 0:
 			world.battle_turn_action_timer.start(5.0)
+	else:
+		match (battlers[0].global_position - global_position / MOVE_DISTANCE).x:
+			-1.0:
+				animated_sprite_2d.flip_h = true
+			1.0:
+				animated_sprite_2d.flip_h = false
 
 
 func _on_battle_turn_timeout() -> void:
 	randomize()
 	var damage: int = attack * critical_hit_bonus if randi_range(1, 100) <= critical_hit_chance else attack
 	battlers[0].take_damage(damage, elemental_attack)
+	animated_sprite_2d.play("attack_" + animation_element)

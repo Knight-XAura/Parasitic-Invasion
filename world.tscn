@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://world.gd" id="1_jychc"]
 [ext_resource type="Texture2D" uid="uid://d0purgbwab6hp" path="res://grid.png" id="1_uie2n"]
-[ext_resource type="PackedScene" uid="uid://b6xktx235a6bd" path="res://enemy/enemy.tscn" id="2_7wxak"]
+[ext_resource type="PackedScene" uid="uid://b6xktx235a6bd" path="res://enemies/larva/larva.tscn" id="2_7wxak"]
 [ext_resource type="PackedScene" uid="uid://rp77upd12m0j" path="res://player/player.tscn" id="2_gafyi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fqg2o"]

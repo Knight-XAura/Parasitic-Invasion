@@ -250,7 +250,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_fire",
-"speed": 0.5
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -258,7 +258,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_grass",
-"speed": 0.5
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -266,7 +266,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_normal",
-"speed": 0.5
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -274,7 +274,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attack_water",
-"speed": 0.5
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -291,7 +291,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_fire",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -308,7 +308,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_grass",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -325,7 +325,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_normal",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -342,7 +342,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hurt_water",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -524,7 +524,7 @@ shape = SubResource("RectangleShape2D_774vv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p5yhc")
-animation = &"idle_normal"
+animation = &"hurt_water"
 autoplay = "idle_normal"
 
 [connection signal="body_entered" from="Melee" to="." method="_on_melee_body_entered"]
